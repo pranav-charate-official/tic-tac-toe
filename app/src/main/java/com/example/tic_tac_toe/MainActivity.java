@@ -7,7 +7,27 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
+
+    /**
+     *
+     * TODO:
+     * Support game continuity if neither 'X' nor 'O' wins
+     *
+     * TODO:
+     * Improve design of UI
+     *
+     * TODO:
+     * Add step undo support
+     *
+     * TODO:
+     * Design the game as...
+     * 'X' and 'O' got only three entries each at a time.
+     * After first three rounds, both need to shuffle their positions within the grid alternatively to win.
+     *
+     */
 
     // Player Representation
     // 0 ~ X
@@ -15,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     // 2 ~ Blank
 
     int activePlayer = 0;
+    boolean isGameActive = true;
     int[] gameState = {2, 2, 2, 2, 2, 2, 2, 2, 2};
 
     int[][] winPos = {
@@ -38,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         ImageView iVTapped = (ImageView) view;
         int tappedImg = Integer.parseInt(iVTapped.getTag().toString());
 
+        if (!isGameActive) {
+            resetGame();
+        }
+
         if (gameState[tappedImg] == 2) {
             gameState[tappedImg] = activePlayer;
 
@@ -57,12 +82,37 @@ public class MainActivity extends AppCompatActivity {
         }
 
         for (int[] winpos : winPos) {
-            if(     gameState[winpos[0]] == gameState[winpos[1]] &&
+            if (gameState[winpos[0]] == gameState[winpos[1]] &&
                     gameState[winpos[1]] == gameState[winpos[2]] &&
-                    gameState[winpos[0]] != 2   ) {
+                    gameState[winpos[0]] != 2) {
+
 
                 //somebody won
+                if (gameState[winpos[0]] == 0)
+                    tvStatus.setText("X has won");
+                else
+                    tvStatus.setText("O has won");
+
+                isGameActive = false;
             }
         }
+    }
+
+    public void resetGame() {
+        isGameActive = true;
+        activePlayer = 0;
+        Arrays.fill(gameState, 2);
+
+        ((ImageView) findViewById(R.id.block1)).setImageResource(0);
+        ((ImageView) findViewById(R.id.block2)).setImageResource(0);
+        ((ImageView) findViewById(R.id.block3)).setImageResource(0);
+        ((ImageView) findViewById(R.id.block4)).setImageResource(0);
+        ((ImageView) findViewById(R.id.block5)).setImageResource(0);
+        ((ImageView) findViewById(R.id.block6)).setImageResource(0);
+        ((ImageView) findViewById(R.id.block7)).setImageResource(0);
+        ((ImageView) findViewById(R.id.block8)).setImageResource(0);
+        ((ImageView) findViewById(R.id.block9)).setImageResource(0);
+
+        tvStatus.setText("X's turn : Tap to play");
     }
 }
