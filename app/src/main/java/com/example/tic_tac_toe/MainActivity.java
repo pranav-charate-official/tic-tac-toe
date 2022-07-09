@@ -13,19 +13,13 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      *
-     * TODO:
-     * Support game continuity if neither 'X' nor 'O' wins
+     * TODO: Support game continuity if neither 'X' nor 'O' wins
      *
-     * TODO:
-     * Improve design of UI
+     * TODO: Improve design of UI
      *
-     * TODO:
-     * Add step undo support
+     * TODO: Add step undo support
      *
-     * TODO:
-     * Design the game as...
-     * 'X' and 'O' got only three entries each at a time.
-     * After first three rounds, both need to shuffle their positions within the grid alternatively to win.
+     * TODO: Design the game as... 'X' and 'O' got only three entries each at a time. After first three rounds, both need to shuffle their positions within the grid alternatively to win.
      *
      */
 
